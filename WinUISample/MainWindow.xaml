@@ -1,0 +1,32 @@
+<Window
+    x:Class="WinUISample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Selectors="using:Selectors"
+    xmlns:Converters="using:Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="Root">
+        <Grid.Resources>
+            <Selectors:TemplateSelector x:Key="TemplateSelector" />
+            <Converters:ExpenseCategoryListConverter x:Key="ExpenseCategoryListConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox
+            ItemsSource="{Binding Expenses}"
+            Name="LstExpenses"
+            DisplayMemberPath="Name" />
+
+        <ContentControl
+            Grid.Column="1"
+            ContentTemplateSelector="{StaticResource TemplateSelector}"
+            Content="{Binding SelectedItem, ElementName=LstExpenses}" />
+    </Grid>
+
+</Window>

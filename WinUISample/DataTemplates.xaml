@@ -1,0 +1,45 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Converters="using:Converters"
+    mc:Ignorable="d">
+
+    <Converters:ExpenseCategoryListConverter x:Key="ExpenseCategoryListConverter" />
+
+    <DataTemplate x:Key="DTExpense">
+        <StackPanel>
+            <TextBlock Text="DTExpense" />
+            <TextBlock Text="{Binding Name}" />
+            <ComboBox DisplayMemberPath="Name">
+                <ComboBox.ItemsSource>
+                    <Binding Converter="{StaticResource ExpenseCategoryListConverter}" />
+                </ComboBox.ItemsSource>
+                <ComboBox.SelectedItem>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Category"
+                        UpdateSourceTrigger="PropertyChanged" />
+                </ComboBox.SelectedItem>
+            </ComboBox>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="DTExpenseSpecial">
+        <StackPanel>
+            <TextBlock Text="DTExpenseSpecial" />
+            <TextBlock Text="{Binding Name}" />
+            <ComboBox DisplayMemberPath="Name">
+                <ComboBox.ItemsSource>
+                    <Binding Converter="{StaticResource ExpenseCategoryListConverter}" />
+                </ComboBox.ItemsSource>
+                <ComboBox.SelectedItem>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Category"
+                        UpdateSourceTrigger="PropertyChanged" />
+                </ComboBox.SelectedItem>
+            </ComboBox>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
